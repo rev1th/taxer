@@ -1,5 +1,5 @@
 
-PROGRESSIVE_RATES = [
+MARGINAL_RATES = [
     (1_950_000, 0.05),
     (3_300_000, 0.1),
     (6_950_000, 0.2),
@@ -52,14 +52,14 @@ def nta(gross_income: float, year: int=2023):
         if es_i[0] and gross_income <= es_i[0]:
             national_taxable_income -= es_i[1]
             break
-    income_slab_limit = 0
+    income_bracket = 0
     national_tax_fixed = 0
-    for r_i in PROGRESSIVE_RATES:
+    for r_i in MARGINAL_RATES:
         if r_i[0] and national_taxable_income > r_i[0]:
-            national_tax_fixed += (r_i[0] - income_slab_limit) * r_i[1]
-            income_slab_limit = r_i[0]
+            national_tax_fixed += (r_i[0] - income_bracket) * r_i[1]
+            income_bracket = r_i[0]
         else:
-            national_tax_total = national_tax_fixed + (national_taxable_income - income_slab_limit) * r_i[1]
+            national_tax_total = national_tax_fixed + (national_taxable_income - income_bracket) * r_i[1]
             break
     local_taxable_income = taxable_income
     for es_i in EXEMPTION_SLABS:

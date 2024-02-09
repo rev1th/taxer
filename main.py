@@ -13,6 +13,7 @@ import sg
 import us
 
 from common import plotter
+from constants import *
 
 FX_API_URL = 'https://v6.exchangerate-api.com/v6/86cf0563936a598b9a7b0112/latest/USD'
 
@@ -41,8 +42,11 @@ def main():
         ('Singapore', sg.iras, sgd, {}),
         ('India', ind.itr, inr, {}),
         ('UK', gb.itr, gbp, {}),
-        ('US-NewYork', us.irs, 1, dict(state='NewYork', city='NYC')),
-        ('US-Chicago', us.irs, 1, dict(state='Chicago')),
+        ('US-NewYork-M', us.irs, 1, dict(state=us.State.NewYork, city=us.City.NewYork, status=Status.Married)),
+        ('US-NewYork', us.irs, 1, dict(state=us.State.NewYork, city=us.City.NewYork)),
+        ('US-NewJersey-M', us.irs, 1, dict(state=us.State.NewJersey, status=Status.Married)),
+        # ('US-Chicago', us.irs, 1, dict(state=us.State.Illinois)),
+        ('US-Florida-M', us.irs, 1, dict(status=Status.Married)),
         ('US-Florida', us.irs, 1, {}),
         ('Australia', au.to, aud, {}),
         ('Japan-Tokyo', jp.nta, jpy, {}),

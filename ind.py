@@ -1,6 +1,6 @@
 
 DEDUCTION_OTHER = 150000
-PROGRESSIVE_RATES = [
+MARGINAL_RATES = [
     (250_000, 0),
     (500_000, 0.05),
     (1000_000, 0.2),
@@ -19,16 +19,17 @@ SURCHARGE_RATES = [
     (None, 0.37)
 ]
 CESS_RATE = 0.04
+
 def itr(gross_income: float) -> float:
-    income_slab_limit = 0
+    income_bracket = 0
     tax_core_fixed = 0
     tax_core_total = 0
-    for ri in PROGRESSIVE_RATES:
+    for ri in MARGINAL_RATES:
         if ri[0] and gross_income > ri[0]:
-            tax_core_fixed += (ri[0] - income_slab_limit) * ri[1]
-            income_slab_limit = ri[0]
+            tax_core_fixed += (ri[0] - income_bracket) * ri[1]
+            income_bracket = ri[0]
         else:
-            tax_core_total = tax_core_fixed + (gross_income - income_slab_limit) * ri[1]
+            tax_core_total = tax_core_fixed + (gross_income - income_bracket) * ri[1]
             break
     tax_surcharge_base = 0
     tax_surcharge_extra = tax_core_total
