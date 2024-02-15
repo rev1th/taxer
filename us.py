@@ -1,7 +1,7 @@
 
 from enum import StrEnum
 
-from constants import *
+from world import *
 
 class State(StrEnum):
     California = 'california'
